@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Nueva venta · Verde POS</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar('ventas')}"></div>
+
+
+<div class="vp-body">
+
+    <main class="vp-main">
+
+        <div class="vp-card">
+
+
+            <!-- ========================= -->
+            <!-- ENCABEZADO -->
+            <!-- ========================= -->
+
+            <div class="vp-page-header">
+
+                <div>
+
+                    <h1>Nueva venta</h1>
+
+                    <p class="vp-subtitle">
+                        Selecciona el cliente y agrega los productos.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================= -->
+            <!-- CLIENTE -->
+            <!-- ========================= -->
+
+            <form
+                    th:action="@{/ventas/cliente}"
+                    method="post">
+
+                <div class="vp-form">
+
+                    <div class="vp-form-group">
+
+                        <label for="cliente">
+                            Cliente
+                        </label>
+
+                        <select
+                                id="cliente"
+                                name="clienteId"
+                                onchange="this.form.submit()">
+
+                            <option value="">
+                                Seleccione un cliente
+                            </option>
+
+                            <option
+                                    th:each="cliente : ${clientes}"
+                                    th:value="${cliente.idCliente}"
+                                    th:text="${cliente.nombre}"
+                                    th:selected="${cliente.idCliente == clienteId}">
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+
+            <!-- ========================= -->
+            <!-- CONTENIDO PRINCIPAL -->
+            <!-- ========================= -->
+
+            <div class="venta-container">
+
+
+                <!-- ========================= -->
+                <!-- PRODUCTOS -->
+                <!-- ========================= -->
+
+                <div class="venta-productos">
+
+                    <h2>Productos</h2>
+
+                    <div class="vp-table-wrap">
+
+                        <table class="vp-table">
+
+                            <thead>
+
+                            <tr>
+
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Acción</th>
+
+                            </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                            <tr th:each="producto : ${productos}">
+
+                                <td
+                                        th:text="${producto.nombre}">
+                                    Producto
+                                </td>
+
+
+                                <td>
+
+                                    $<span
+                                        th:text="${#numbers.formatDecimal(producto.precioVenta, 1, 2)}">
+                                    </span>
+
+                                </td>
+
+
+                                <td
+                                        th:text="${producto.stock}">
+                                    0
+                                </td>
+
+
+                                <td>
+
+                                    <form
+                                            th:action="@{/ventas/agregar}"
+                                            method="post">
+
+                                        <input
+                                                type="hidden"
+                                                name="idProducto"
+                                                th:value="${producto.idProducto}">
+
+                                        <button
+                                                type="submit"
+                                                class="vp-btn vp-btn-primary">
+
+                                            Agregar
+
+                                        </button>
+
+                                    </form>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr th:if="${productos.isEmpty()}">
+
+                                <td
+                                        colspan="4"
+                                        class="vp-table-empty">
+
+                                    No hay productos disponibles.
+
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ========================= -->
+                <!-- TICKET -->
+                <!-- ========================= -->
+
+                <div class="venta-ticket">
+
+                    <div class="ticket-card">
+
+
+                        <!-- CABECERA -->
+
+                        <div class="ticket-header">
+
+                            <h2>Ticket</h2>
+
+                        </div>
+
+
+                        <div class="ticket-body">
+
+
+                            <!-- TICKET VACÍO -->
+
+                            <div
+                                    th:if="${carrito.isEmpty()}"
+                                    class="ticket-vacio">
+
+                                No hay productos agregados.
+
+                            </div>
+
+
+                            <!-- ========================= -->
+                            <!-- PRODUCTOS DEL CARRITO -->
+                            <!-- ========================= -->
+
+                            <div
+                                    th:each="item : ${carrito}"
+                                    class="ticket-producto">
+
+
+                                <!-- INFORMACIÓN DEL PRODUCTO -->
+
+                                <div class="ticket-producto-info">
+
+                                    <strong
+                                            th:text="${item.producto.nombre}">
+
+                                        Producto
+
+                                    </strong>
+
+                                    <span
+                                            th:text="'$' + ${#numbers.formatDecimal(item.subtotal, 1, 2)}">
+
+                                        $0.00
+
+                                    </span>
+
+                                </div>
+
+
+                                <!-- ========================= -->
+                                <!-- CONTROLES -->
+                                <!-- ========================= -->
+
+                                <div class="ticket-cantidad">
+
+
+                                    <!-- DISMINUIR -->
+
+                                    <form
+                                            th:action="@{/ventas/disminuir}"
+                                            method="post">
+
+                                        <input
+                                                type="hidden"
+                                                name="idProducto"
+                                                th:value="${item.producto.idProducto}">
+
+                                        <button
+                                                type="submit"
+                                                class="vp-icon-btn">
+
+                                            −
+
+                                        </button>
+
+                                    </form>
+
+
+                                    <!-- CANTIDAD -->
+
+                                    <span
+                                            th:text="${item.cantidad}">
+
+                                        1
+
+                                    </span>
+
+
+                                    <!-- AUMENTAR -->
+
+                                    <form
+                                            th:action="@{/ventas/aumentar}"
+                                            method="post">
+
+                                        <input
+                                                type="hidden"
+                                                name="idProducto"
+                                                th:value="${item.producto.idProducto}">
+
+                                        <button
+                                                type="submit"
+                                                class="vp-icon-btn">
+
+                                            +
+
+                                        </button>
+
+                                    </form>
+
+
+                                    <!-- ========================= -->
+                                    <!-- ELIMINAR -->
+                                    <!-- ========================= -->
+
+                                    <form
+                                            th:action="@{/ventas/eliminar}"
+                                            method="post">
+
+                                        <input
+                                                type="hidden"
+                                                name="idProducto"
+                                                th:value="${item.producto.idProducto}">
+
+                                        <button
+                                                type="submit"
+                                                class="vp-icon-btn danger"
+                                                title="Eliminar producto">
+
+                                            🗑
+
+                                        </button>
+
+                                    </form>
+
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- ========================= -->
+                            <!-- TOTALES -->
+                            <!-- ========================= -->
+
+                            <div class="ticket-totales">
+
+
+                                <div>
+
+                                    <span>
+                                        Subtotal
+                                    </span>
+
+                                    <strong
+                                            th:text="'$' + ${#numbers.formatDecimal(subtotal, 1, 2)}">
+
+                                        $0.00
+
+                                    </strong>
+
+                                </div>
+
+
+                                <div>
+
+                                    <span>
+                                        IVA (16%)
+                                    </span>
+
+                                    <strong
+                                            th:text="'$' + ${#numbers.formatDecimal(iva, 1, 2)}">
+
+                                        $0.00
+
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="ticket-total">
+
+                                    <span>
+                                        Total
+                                    </span>
+
+                                    <strong
+                                            th:text="'$' + ${#numbers.formatDecimal(total, 1, 2)}">
+
+                                        $0.00
+
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- ========================= -->
+                            <!-- COBRAR -->
+                            <!-- ========================= -->
+
+                            <form
+                                    th:action="@{/ventas/guardar}"
+                                    method="post">
+
+                                <button
+                                        type="submit"
+                                        class="vp-btn vp-btn-primary ticket-cobrar"
+                                        th:text="'Cobrar $' + ${#numbers.formatDecimal(total, 1, 2)}">
+
+                                    Cobrar
+
+                                </button>
+
+                            </form>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================= -->
+            <!-- REGRESAR -->
+            <!-- ========================= -->
+
+            <div class="vp-form-actions">
+
+                <a
+                        th:href="@{/ventas}"
+                        class="vp-btn vp-btn-outline">
+
+                    Regresar
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+
+</html>

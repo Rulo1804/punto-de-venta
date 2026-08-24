@@ -16,4 +16,6 @@ public interface IProductoService {
 
     //Metodos especiales
     public boolean hayStock (Integer idProducto, Integer stock);
+
+    public void reducirStock(Integer idProducto, Integer cantidad);
 }

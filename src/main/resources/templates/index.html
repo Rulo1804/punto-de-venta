@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Punto de Venta</title>
 </head>
 <body>
-    <h1>Este es un punto de venta</h1>
+    <h1 th:text="'Hola ' + ${nombre} "></h1>
     <p>SpringBoot jalando perfectamente? Hola</p>
 </body>
 </html>

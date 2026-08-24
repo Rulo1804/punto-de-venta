@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!--
+  Fragmento de navbar. Inclúyelo en cada página con:
+  <div th:replace="~{fragments/navbar :: navbar('categorias')}"></div>
+
+  Valor esperado del parámetro 'activo' (para marcar el link en verde):
+  'venta' | 'productos' | 'categorias' | 'proveedores' | 'clientes'
+
+  VERIFICAR: el link "Venta" apunta a "/" — cámbialo si tu HomeController
+  usa otra ruta para la pantalla de ventas.
+-->
+<nav th:fragment="navbar(activo)" class="vp-navbar">
+
+    <a th:href="@{/}" class="vp-brand">
+        <span class="vp-brand-logo">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 21c-4.5-1.2-8-5-8-10 0-3.5 2-6.5 5-8 .3 3.5 2 5.5 5 7 2.5 1.2 4 3.3 4 6 0 2.8-2.2 5-5 5-2.2 0-4-1.5-4.6-3.6"
+                      stroke="#FDF6ED" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </span>
+        Verde POS
+    </a>
+
+    <div class="vp-nav-links">
+        <a th:href="@{/}" class="vp-nav-link" th:classappend="${activo == 'venta'} ? 'active'">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L21 8H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9" cy="21" r="1.4" fill="currentColor"/>
+                <circle cx="18" cy="21" r="1.4" fill="currentColor"/>
+            </svg>
+            Venta
+        </a>
+        <a th:href="@{/productos}" class="vp-nav-link" th:classappend="${activo == 'productos'} ? 'active'">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 8 12 3 3 8v8l9 5 9-5V8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M3 8l9 5 9-5M12 13v8" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+            Productos
+        </a>
+        <a th:href="@{/categorias}" class="vp-nav-link" th:classappend="${activo == 'categorias'} ? 'active'">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.6 12.9 12.9 20.6a2 2 0 0 1-2.8 0l-6.7-6.7a2 2 0 0 1-.6-1.4V4h8.5a2 2 0 0 1 1.4.6l6.7 6.7a2 2 0 0 1 .1 2.6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <circle cx="7.5" cy="7.5" r="1.2" fill="currentColor"/>
+            </svg>
+            Categorías
+        </a>
+        <a th:href="@{/proveedores}" class="vp-nav-link" th:classappend="${activo == 'proveedores'} ? 'active'">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <circle cx="7.5" cy="18" r="1.6" stroke="currentColor" stroke-width="1.6"/>
+                <circle cx="17.5" cy="18" r="1.6" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            Proveedores
+        </a>
+        <a th:href="@{/clientes}" class="vp-nav-link" th:classappend="${activo == 'clientes'} ? 'active'">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M3 20c.6-3.4 3-5.4 6-5.4s5.4 2 6 5.4M15.5 5.2A3.2 3.2 0 0 1 17 11.3M18.5 14.6c2 .6 3.3 2.2 3.7 4.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            Clientes
+        </a>
+    </div>
+</nav>
+
+</body>
+</html>

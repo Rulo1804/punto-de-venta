@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Categorías · Verde POS</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<!-- Navbar: 'categorias' marca este link como activo -->
+<div th:replace="~{fragments/navbar :: navbar('categorias')}"></div>
+
+<div class="vp-body">
+    <main class="vp-main">
+        <div class="vp-card">
+
+            <div class="vp-page-header">
+                <div>
+                    <!--
+                      th:text ejemplo: mostramos el total de registros usando
+                      el tamaño de la lista que ya manda el controller.
+                    -->
+                    <span class="vp-badge-count" th:text="${categorias.size()} + ' registros'">0 registros</span>
+                    <h1>Categorías</h1>
+                    <p class="vp-subtitle">Administra las categorías de tus productos.</p>
+                </div>
+
+                <!-- th:href: mismo endpoint que ya tenías en tu controller -->
+                <a th:href="@{/categorias/nueva}" class="vp-btn vp-btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    Agregar
+                </a>
+            </div>
+
+            <div class="vp-table-wrap">
+                <table class="vp-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- th:each: recorre la lista ${categorias} que manda tu CategoriaController -->
+                    <tr th:each="categoria : ${categorias}">
+                        <!-- th:text: campos reales de tu entidad Categoria -->
+                        <td th:text="${categoria.idCategoria}">1</td>
+                        <td th:text="${categoria.nombre}">Bebidas</td>
+                        <td>
+                            <div class="vp-actions">
+                                <!-- th:href: mismos endpoints de editar/eliminar que ya tenías -->
+                                <a th:href="@{/categorias/editar/{id}(id=${categoria.idCategoria})}" class="vp-icon-btn" title="Editar">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 20h4L18.5 9.5a2.1 2.1 0 0 0-3-3L5 17v3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+                                <a th:href="@{/categorias/eliminar/{id}(id=${categoria.idCategoria})}" class="vp-icon-btn danger" title="Eliminar"
+                                   onclick="return confirm('¿Eliminar esta categoría?');">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-9 0 1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- th:if: fila de estado vacío cuando la lista no tiene elementos -->
+                    <tr th:if="${categorias.isEmpty()}">
+                        <td colspan="3" class="vp-table-empty">Aún no hay categorías registradas.</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

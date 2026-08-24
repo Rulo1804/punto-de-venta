@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!--
+  Fragmento de sidebar — OPCIONAL.
+  La navbar de arriba ya cubre la navegación entre entidades, así que este
+  sidebar es solo para páginas que necesiten accesos rápidos extra
+  (por ejemplo, dentro de "Venta" para filtrar por categoría, o en un
+  futuro dashboard). Inclúyelo así donde lo necesites:
+
+  <div th:replace="~{fragments/sidebar :: sidebar('categorias')}"></div>
+
+  Si no lo necesitas en una página, simplemente no lo incluyas: el layout
+  (.vp-body / .vp-main) funciona igual de bien sin él.
+-->
+<aside th:fragment="sidebar(activo)" class="vp-sidebar">
+    <h3>Accesos rápidos</h3>
+
+    <a th:href="@{/productos}" class="vp-sidebar-link" th:classappend="${activo == 'productos'} ? 'active'">Productos</a>
+    <a th:href="@{/categorias}" class="vp-sidebar-link" th:classappend="${activo == 'categorias'} ? 'active'">Categorías</a>
+    <a th:href="@{/proveedores}" class="vp-sidebar-link" th:classappend="${activo == 'proveedores'} ? 'active'">Proveedores</a>
+    <a th:href="@{/clientes}" class="vp-sidebar-link" th:classappend="${activo == 'clientes'} ? 'active'">Clientes</a>
+
+    <!--
+      VERIFICAR / EJEMPLO: si más adelante quieres filtros reales aquí
+      (por ejemplo categorías para filtrar productos), se vería así:
+
+      <h3 style="margin-top:20px;">Filtrar por categoría</h3>
+      <a th:each="categoria : ${categorias}"
+         th:href="@{/productos(categoriaId=${categoria.idCategoria})}"
+         th:text="${categoria.nombre}"
+         class="vp-sidebar-link">
+      </a>
+    -->
+</aside>
+
+</body>
+</html>

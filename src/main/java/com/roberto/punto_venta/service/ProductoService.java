@@ -43,4 +43,15 @@ public class ProductoService implements IProductoService{
         }
         return producto.getStock() >= stock; //gestStock es el stock que hay en la DB y Stock es el que solicita alguien
     }
+
+    @Override
+    public void reducirStock(Integer idProducto, Integer cantidad) {
+
+        Producto producto = productoRepository.findById(idProducto).orElse(null);
+
+        if (producto != null && producto.getStock() >= cantidad) {
+            producto.setStock(producto.getStock() - cantidad);
+            productoRepository.save(producto);
+        }
+    }
 }

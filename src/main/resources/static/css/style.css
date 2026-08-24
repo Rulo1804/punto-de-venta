@@ -1,0 +1,508 @@
+/* =========================================================
+   Verde POS — hoja de estilos global
+   Ruta: src/main/resources/static/css/style.css
+   ========================================================= */
+
+:root {
+  --verde-oscuro: #778873;
+  --verde-claro: #A1BC98;
+  --beige: #DCCFC0;
+  --crema: #FDF6ED;
+
+  --texto-principal: #3f4a3c;
+  --texto-secundario: #8a8578;
+  --borde: #ece3d6;
+  --sombra: 0 10px 25px -12px rgba(85, 96, 68, 0.18);
+  --radio: 16px;
+  --danger: #b5654f;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: var(--texto-principal);
+  background: linear-gradient(160deg, var(--crema) 0%, var(--crema) 55%, var(--beige) 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; }
+
+/* ===================== NAVBAR ===================== */
+
+.vp-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  background-color: var(--crema);
+  border-bottom: 1px solid var(--borde);
+}
+
+.vp-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.vp-brand-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background-color: var(--verde-oscuro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.vp-brand-logo svg { width: 19px; height: 19px; }
+
+.vp-nav-links { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+
+.vp-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.vp-nav-link svg { width: 16px; height: 16px; }
+.vp-nav-link:hover { background-color: rgba(119, 136, 115, 0.12); }
+.vp-nav-link.active { background-color: var(--verde-oscuro); color: #fff; }
+
+/* ===================== LAYOUT PRINCIPAL ===================== */
+
+.vp-body {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px;
+  gap: 24px;
+}
+
+.vp-main { flex: 1; min-width: 0; }
+
+@media (max-width: 900px) {
+  .vp-body { flex-direction: column; }
+  .vp-navbar { flex-wrap: wrap; gap: 12px; }
+}
+
+.vp-card {
+  background-color: #fffaf3;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 28px;
+}
+
+/* ===================== SIDEBAR (opcional) ===================== */
+
+.vp-sidebar {
+  width: 230px;
+  flex-shrink: 0;
+  background-color: #fffaf3;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 20px;
+}
+
+.vp-sidebar h3 {
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--texto-secundario);
+}
+
+.vp-sidebar-link {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.vp-sidebar-link:hover { background-color: rgba(119, 136, 115, 0.12); }
+.vp-sidebar-link.active { background-color: var(--verde-claro); color: #fff; }
+
+/* ===================== ENCABEZADO DE PÁGINA ===================== */
+
+.vp-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.vp-badge-count {
+  display: inline-block;
+  background-color: var(--verde-claro);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+.vp-page-header h1 { margin: 0 0 4px; font-size: 1.5rem; font-weight: 700; }
+.vp-page-header .vp-subtitle { margin: 0; color: var(--texto-secundario); font-size: 0.92rem; }
+
+/* ===================== BOTONES ===================== */
+
+.vp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.vp-btn svg { width: 15px; height: 15px; }
+
+.vp-btn-primary { background-color: var(--verde-oscuro); color: #fff; }
+.vp-btn-primary:hover { background-color: #667660; }
+
+.vp-btn-outline {
+  background-color: transparent;
+  color: var(--texto-principal);
+  border: 1px solid var(--borde);
+}
+.vp-btn-outline:hover { background-color: var(--crema); }
+
+/* ===================== TABLA ===================== */
+
+.vp-search {
+  position: relative;
+  margin-bottom: 20px;
+  max-width: 360px;
+}
+
+.vp-search input {
+  width: 100%;
+  padding: 11px 16px 11px 40px;
+  border-radius: 999px;
+  border: 1px solid var(--borde);
+  background-color: var(--crema);
+  font-size: 0.92rem;
+  outline: none;
+}
+
+.vp-search input:focus { border-color: var(--verde-claro); }
+
+.vp-search svg {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  color: var(--texto-secundario);
+}
+
+.vp-table-wrap { overflow-x: auto; }
+
+.vp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.vp-table thead th {
+  text-align: left;
+  color: var(--texto-secundario);
+  font-weight: 600;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--borde);
+}
+
+.vp-table tbody td {
+  padding: 14px;
+  border-bottom: 1px solid var(--borde);
+}
+
+.vp-table tbody tr:hover { background-color: rgba(161, 188, 152, 0.09); }
+.vp-table tbody tr:last-child td { border-bottom: none; }
+
+.vp-table-empty {
+  text-align: center;
+  padding: 40px 12px;
+  color: var(--texto-secundario);
+}
+
+.vp-actions { display: flex; gap: 6px; }
+
+.vp-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--crema);
+  border: 1px solid var(--borde);
+}
+
+.vp-icon-btn svg { width: 14px; height: 14px; }
+.vp-icon-btn:hover { background-color: var(--beige); }
+.vp-icon-btn.danger svg { color: var(--danger); }
+.vp-icon-btn.danger:hover { background-color: #f3ded9; }
+
+/* ===================== FORMULARIOS ===================== */
+
+.vp-form { max-width: 480px; }
+
+.vp-form-group { margin-bottom: 18px; }
+
+.vp-form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--texto-principal);
+}
+
+.vp-form-group input,
+.vp-form-group select,
+.vp-form-group textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--borde);
+  background-color: var(--crema);
+  font-size: 0.92rem;
+  outline: none;
+  font-family: inherit;
+}
+
+.vp-form-group input:focus,
+.vp-form-group select:focus,
+.vp-form-group textarea:focus { border-color: var(--verde-claro); }
+
+.vp-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+/* ===================== PUNTO DE VENTA / TICKET ===================== */
+
+.venta-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  align-items: start;
+}
+
+.venta-productos h2,
+.venta-ticket h2 {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+}
+
+
+/* ===================== TICKET ===================== */
+
+.ticket-card {
+  background-color: #fff;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  overflow: hidden;
+}
+
+.ticket-header {
+  padding: 20px;
+  background-color: var(--verde-oscuro);
+  color: #fff;
+  text-align: center;
+}
+
+.ticket-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+
+/* ===================== CUERPO DEL TICKET ===================== */
+
+.ticket-body {
+  padding: 20px;
+}
+
+.ticket-vacio {
+  text-align: center;
+  padding: 30px 10px;
+  color: var(--texto-secundario);
+  font-size: 0.9rem;
+}
+
+
+/* ===================== PRODUCTOS DEL TICKET ===================== */
+
+.ticket-producto {
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--borde);
+}
+
+.ticket-producto-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.ticket-producto-info strong {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.ticket-producto-info span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+
+/* ===================== CANTIDAD ===================== */
+
+.ticket-cantidad {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ticket-cantidad form {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.ticket-cantidad span {
+  min-width: 28px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.ticket-cantidad .vp-icon-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+/* ===================== TOTALES ===================== */
+
+.ticket-totales {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--borde);
+}
+
+.ticket-totales > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 0.88rem;
+}
+
+.ticket-totales span {
+  color: var(--texto-secundario);
+}
+
+.ticket-totales strong {
+  font-weight: 600;
+}
+
+.ticket-totales .ticket-total {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--borde);
+  margin-bottom: 0;
+}
+
+.ticket-total span {
+  color: var(--texto-principal);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.ticket-total strong {
+  color: var(--verde-oscuro);
+  font-size: 1.3rem;
+}
+
+
+/* ===================== BOTÓN COBRAR ===================== */
+
+.ticket-cobrar {
+  width: 100%;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 13px 18px;
+  font-size: 0.95rem;
+}
+
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 1000px) {
+
+  .venta-container {
+    grid-template-columns: 1fr;
+  }
+
+  .venta-ticket {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .venta-container {
+    gap: 18px;
+  }
+
+  .ticket-body {
+    padding: 16px;
+  }
+
+}
+/* ===================== FOOTER ===================== */
+
+.vp-footer {
+  text-align: center;
+  padding: 18px 12px 24px;
+  font-size: 0.8rem;
+  color: var(--texto-secundario);
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+
+    <title th:text="${cliente.idCliente == null} ? 'Nuevo Cliente · Verde POS' : 'Editar Cliente · Verde POS'">
+        Cliente
+    </title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+
+<div th:replace="~{fragments/navbar :: navbar('clientes')}"></div>
+
+
+<div class="vp-body">
+
+    <main class="vp-main">
+
+        <div class="vp-card">
+
+            <div class="vp-page-header">
+
+                <div>
+
+                    <h1 th:text="${cliente.idCliente == null} ? 'Nuevo cliente' : 'Editar cliente'">
+                        Nuevo cliente
+                    </h1>
+
+                    <p class="vp-subtitle">
+                        Completa la información del cliente.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form th:action="@{/clientes/guardar}"
+                  th:object="${cliente}"
+                  method="post"
+                  class="vp-form">
+
+
+                <input type="hidden"
+                       th:field="*{idCliente}">
+
+
+
+                <div class="vp-form-group">
+
+                    <label for="nombre">
+                        Nombre
+                    </label>
+
+                    <input type="text"
+                           id="nombre"
+                           th:field="*{nombre}"
+                           placeholder="Ej. Roberto Zamora"
+                           required>
+
+                </div>
+
+
+
+                <div class="vp-form-group">
+
+                    <label for="telefono">
+                        Teléfono
+                    </label>
+
+                    <input type="text"
+                           id="telefono"
+                           th:field="*{telefono}"
+                           placeholder="Ej. 3312345678">
+
+                </div>
+
+
+
+                <div class="vp-form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input type="email"
+                           id="email"
+                           th:field="*{email}"
+                           placeholder="Ej. cliente@email.com">
+
+                </div>
+
+
+
+                <div class="vp-form-actions">
+
+                    <button type="submit"
+                            class="vp-btn vp-btn-primary">
+
+                        Guardar
+
+                    </button>
+
+
+
+                    <a th:href="@{/clientes}"
+                       class="vp-btn vp-btn-outline">
+
+                        Regresar
+
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+
+</html>

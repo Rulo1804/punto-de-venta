@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- th:text: título dinámico según si es alta o edición (idCategoria nulo = nueva) -->
+    <title th:text="${categoria.idCategoria == null} ? 'Nueva Categoría · Verde POS' : 'Editar Categoría · Verde POS'">Categoría</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar('categorias')}"></div>
+
+<div class="vp-body">
+    <main class="vp-main">
+        <div class="vp-card">
+
+            <div class="vp-page-header">
+                <div>
+                    <h1 th:text="${categoria.idCategoria == null} ? 'Nueva categoría' : 'Editar categoría'">Nueva categoría</h1>
+                    <p class="vp-subtitle">Completa el nombre de la categoría.</p>
+                </div>
+            </div>
+
+            <!-- th:object: mismo objeto "categoria" que manda tu controller (nuevo o existente) -->
+            <form th:action="@{/categorias/guardar}" th:object="${categoria}" method="post" class="vp-form">
+
+                <!-- th:field: igual que ya lo tenías, viaja oculto para saber si es alta o edición -->
+                <input type="hidden" th:field="*{idCategoria}">
+
+                <div class="vp-form-group">
+                    <label for="nombre">Nombre</label>
+                    <!-- th:field: enlaza este input con categoria.nombre -->
+                    <input type="text" id="nombre" th:field="*{nombre}" placeholder="Ej. Bebidas" required>
+                </div>
+
+                <div class="vp-form-actions">
+                    <button type="submit" class="vp-btn vp-btn-primary">Guardar</button>
+                    <a th:href="@{/categorias}" class="vp-btn vp-btn-outline">Regresar</a>
+                </div>
+            </form>
+
+        </div>
+    </main>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>
