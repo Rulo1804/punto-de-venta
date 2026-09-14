@@ -2,16 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<!--
-  Fragmento de navbar. Inclúyelo en cada página con:
-  <div th:replace="~{fragments/navbar :: navbar('categorias')}"></div>
 
-  Valor esperado del parámetro 'activo' (para marcar el link en verde):
-  'venta' | 'productos' | 'categorias' | 'proveedores' | 'clientes'
-
-  VERIFICAR: el link "Venta" apunta a "/" — cámbialo si tu HomeController
-  usa otra ruta para la pantalla de ventas.
--->
 <nav th:fragment="navbar(activo)" class="vp-navbar">
 
     <a th:href="@{/}" class="vp-brand">

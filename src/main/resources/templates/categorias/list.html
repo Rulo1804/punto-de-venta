@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<!-- Navbar: 'categorias' marca este link como activo -->
+
 <div th:replace="~{fragments/navbar :: navbar('categorias')}"></div>
 
 <div class="vp-body">
@@ -16,10 +16,7 @@
 
             <div class="vp-page-header">
                 <div>
-                    <!--
-                      th:text ejemplo: mostramos el total de registros usando
-                      el tamaño de la lista que ya manda el controller.
-                    -->
+
                     <span class="vp-badge-count" th:text="${categorias.size()} + ' registros'">0 registros</span>
                     <h1>Categorías</h1>
                     <p class="vp-subtitle">Administra las categorías de tus productos.</p>
@@ -44,14 +41,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <!-- th:each: recorre la lista ${categorias} que manda tu CategoriaController -->
+
                     <tr th:each="categoria : ${categorias}">
                         <!-- th:text: campos reales de tu entidad Categoria -->
                         <td th:text="${categoria.idCategoria}">1</td>
                         <td th:text="${categoria.nombre}">Bebidas</td>
                         <td>
                             <div class="vp-actions">
-                                <!-- th:href: mismos endpoints de editar/eliminar que ya tenías -->
+
                                 <a th:href="@{/categorias/editar/{id}(id=${categoria.idCategoria})}" class="vp-icon-btn" title="Editar">
                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M4 20h4L18.5 9.5a2.1 2.1 0 0 0-3-3L5 17v3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
@@ -67,7 +64,7 @@
                         </td>
                     </tr>
 
-                    <!-- th:if: fila de estado vacío cuando la lista no tiene elementos -->
+
                     <tr th:if="${categorias.isEmpty()}">
                         <td colspan="3" class="vp-table-empty">Aún no hay categorías registradas.</td>
                     </tr>

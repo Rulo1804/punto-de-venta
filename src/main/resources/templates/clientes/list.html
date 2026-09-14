@@ -98,7 +98,7 @@
 
                             <div class="vp-actions">
 
-                                <!-- 🔴 CAMBIAR ruta e ID -->
+
                                 <a th:href="@{/clientes/editar/{id}(id=${cliente.idCliente})}"
                                    class="vp-icon-btn"
                                    title="Editar">
@@ -117,7 +117,7 @@
                                 </a>
 
 
-                                <!-- 🔴 CAMBIAR ruta e ID -->
+
                                 <a th:href="@{/clientes/eliminar/{id}(id=${cliente.idCliente})}"
                                    class="vp-icon-btn danger"
                                    title="Eliminar"
@@ -144,7 +144,7 @@
                     </tr>
 
 
-                    <!-- 🔴 CAMBIAR "clientes" -->
+
                     <tr th:if="${clientes.isEmpty()}">
 
                         <td colspan="6"

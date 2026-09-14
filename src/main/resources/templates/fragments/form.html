@@ -2,16 +2,13 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <!--
-      th:text: título dinámico según si el id viene nulo (alta) o no (edición).
-      REEMPLAZAR "entidad.id" por el id real, ej. producto.idProducto
-    -->
+
     <title th:text="${entidad.id == null} ? 'Nuevo registro · Verde POS' : 'Editar registro · Verde POS'">Entidad</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<!-- REEMPLAZAR 'entidad' por 'productos' | 'proveedores' | 'clientes' según corresponda -->
+
 <div th:replace="~{fragments/navbar :: navbar('entidad')}"></div>
 
 <div class="vp-body">
@@ -25,24 +22,12 @@
                 </div>
             </div>
 
-            <!--
-              th:object: el objeto que manda tu controller en el Model,
-              tanto para "nuevo" (vacío) como para "editar" (con datos).
-              REEMPLAZAR "entidad" por el nombre real del atributo,
-              ej. th:object="${producto}"
-            -->
             <form th:action="@{/entidad/guardar}" th:object="${entidad}" method="post" class="vp-form">
 
-                <!--
-                  th:field oculto para el id — igual patrón que ya usaste en Categoría.
-                  REEMPLAZAR *{id} por el nombre real, ej. *{idProducto}
-                -->
+
                 <input type="hidden" th:field="*{id}">
 
-                <!--
-                  Un .vp-form-group por cada campo del formulario.
-                  REEMPLAZAR el label, el name/id y el th:field por los campos reales.
-                -->
+
                 <div class="vp-form-group">
                     <label for="campo1">Campo 1</label>
                     <input type="text" id="campo1" th:field="*{campo1}" placeholder="Ej. valor" required>
@@ -53,25 +38,11 @@
                     <input type="text" id="campo2" th:field="*{campo2}" placeholder="Ej. valor">
                 </div>
 
-                <!--
-                  EJEMPLO para un select ligado a otra entidad (ej. Producto -> Categoria):
-                  necesitas mandar la lista de opciones desde el controller,
-                  ej. model.addAttribute("categorias", categoriaService.listarCategorias());
 
-                  <div class="vp-form-group">
-                      <label for="categoria">Categoría</label>
-                      <select id="categoria" th:field="*{categoria}">
-                          <option th:each="categoria : ${categorias}"
-                                  th:value="${categoria.idCategoria}"
-                                  th:text="${categoria.nombre}">
-                          </option>
-                      </select>
-                  </div>
-                -->
 
                 <div class="vp-form-actions">
                     <button type="submit" class="vp-btn vp-btn-primary">Guardar</button>
-                    <!-- REEMPLAZAR "/entidad" por la ruta real del listado, ej. "/productos" -->
+
                     <a th:href="@{/entidad}" class="vp-btn vp-btn-outline">Regresar</a>
                 </div>
             </form>

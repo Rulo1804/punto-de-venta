@@ -2,10 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<!--
-  Fragmento de footer. Inclúyelo al final del body con:
-  <div th:replace="~{fragments/footer :: footer}"></div>
--->
+
 <footer th:fragment="footer" class="vp-footer">
     &copy; <span th:text="${#calendars.format(#calendars.createNow(), 'yyyy')}">2026</span> Verde POS
 </footer>
