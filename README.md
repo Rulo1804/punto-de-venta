@@ -10,43 +10,43 @@ El sistema permite administrar productos, categorías, clientes y proveedores, a
 
 ### Categorías
 
-![Categorías](screenshots/categorias.png)
+![Categorías](screenshots/categorias.PNG)
 
 ### Productos
 
-![Productos](screenshots/productos.png)
+![Productos](screenshots/productos.PNG)
 
 ### Clientes
 
-![Clientes](screenshots/clientes.png)
+![Clientes](screenshots/clientes.PNG)
 
 ### Proveedores
 
-![Proveedores](screenshots/proveedores.png)
+![Proveedores](screenshots/proveedores.PNG)
 
 ### Ventas
 
-![Ventas](screenshots/tabla_ventas.png)
+![Ventas](screenshots/tabla_ventas.PNG)
 
 ### Realizar venta
 
-![Realizar venta](screenshots/realizar_venta.png)
+![Realizar venta](screenshots/realizar_venta.PNG)
 
 ### Agregar categoría
 
-![Agregar categoría](screenshots/agregar_categoria.png)
+![Agregar categoría](screenshots/agregar_categoria.PNG)
 
 ### Agregar cliente
 
-![Agregar cliente](screenshots/agregar_cliente.png)
+![Agregar cliente](screenshots/agregar_cliente.PNG)
 
 ### Agregar producto
 
-![Agregar producto](screenshots/agregar_producto.png)
+![Agregar producto](screenshots/agregar_producto.PNG)
 
 ### Agregar proveedor
 
-![Agregar proveedor](screenshots/agregar_proveedor.png)
+![Agregar proveedor](screenshots/agregar_proveedor.PNG)
 
 ---
 
